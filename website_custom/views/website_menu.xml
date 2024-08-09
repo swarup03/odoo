@@ -54,7 +54,7 @@
                     <div class="modal-content d-flex mt-5 p-3">
                         <div class="d-flex align-items-center">
                             <input type="search" name="search" class="form-control input_search_category oe_search_box border-0 bg-light" t-att-placeholder="placeholder if placeholder else search_placeholder"/>
-                            <button type="button" class="btn oe_search_button ms-3" aria-label="Search" title="Search">
+                            <button type="button" class="btn o_search_button ms-3" aria-label="Search" title="Search">
                                 <i class="oi oi-search"/>
                             </button>
                         </div>
