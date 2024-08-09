@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="shopping_customer_id" name="Sale orders">
+        <t t-call="website.layout">
+            <div class="shopping_mall_customer my-3 container">
+                <table class="table table-info">
+                    <thead>
+                        <tr>
+                            <th scope="col">Order#</th>
+                            <th scope="col">Number</th>
+                            <th scope="col">Customer</th>
+                            <th scope="col">Sales Person</th>
+                            <th scope="col">View</th>
+                            <th scope="col" class="text-end">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-set="i" t-value="1"/>
+                        <t t-foreach="orders" t-as="order">
+                            <tr>
+                                <t t-set="order_href" t-value="'/saleOrder/' + str(order.id) + '?access_token=' + str(order.access_token)"/>
+                                <th scope="row"><t t-esc="i"/></th>
+                                <td><t t-esc="order.name"/></td>
+                                <td><t t-esc="order.partner_id.name"/></td>
+                                <td><t t-esc="order.user_id.name"/></td>
+                                <td><a t-att-href="order_href">Here</a></td>
+                                <td class="text-end"><t t-esc="order.currency_id.symbol"/><t t-esc="order.amount_total"/></td>
+                                
+                            </tr>
+                            <t t-set="i" t-value="i + 1"/>
+                        </t>
+                    </tbody>
+                </table>
+            </div>
+        </t>
+    </template>
+</odoo>

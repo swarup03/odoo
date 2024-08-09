@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_student_list_search" model="ir.ui.view">
+            <field name="name">student.search.view</field>
+            <field name="model">school.student</field>
+            <field name="arch" type="xml">
+                <search string="Search Property">
+                    <!-- Search fields -->
+                    <field name="gender" string="Order Status"/>
+                    <field name="subject_ids" string="Subjects"/>
+                    <!-- <field name="order_date" string="Order Date"/>
+                    <field name="payment_status" string="Payment Status"/> -->
+                    
+                    <!-- Filters -->
+                    <filter string="Gender" name="male"
+                            domain="[('gender', '=', 'male')]"/>
+                    <filter string="Gender" name="female"
+                            domain="[('gender', '=', 'female')]"/>
+                    
+
+                    <group expand="0" string="Group By">
+                        <filter string="Students" name="group_by_student_adds"  context="{'group_by': 'subject_ids'}"/>
+
+                    </group>
+                    <searchpanel>
+                        <field name="gender" string="Gender" enable_counters="1"/>
+                        <field name="school_id" string="subjects" enable_counters="1"></field>
+                    </searchpanel>
+                </search>
+            </field>
+        </record>
+
+        <!-- Define Views -->
+        <record id="view_student_form" model="ir.ui.view">
+            <field name="name">student.form.view</field>
+            <field name="model">school.student</field>
+            <field name="arch" type="xml">
+                <form js_class="student_view_form">
+                    <header>
+                        <button string="Remove student" name="remove_student" type="object" class="oe_highlight" confirm="Are you sure you want to remove the student(s)?"/>
+                        <button string="Result Page" name="%(school.action_student_result)d" class="oe_highlight" type="action"/>
+                        <button string="Send Mail" name="action_send_email" type="object" class="oe_highlight"/>
+                    </header>   
+                <sheet>
+                    <div name="button_box" class="oe_button_box" position="inside">
+                        <button class="oe_stat_button"
+                                    type="object"
+                                    icon="fa-edit"
+                                    name="action_get_marks_record">
+                            <field string="Marks" name="marks_count" widget="statinfo"/>
+                        </button>
+                        <button class="oe_stat_button"
+                                    type="object"
+                                    icon="fa-flag"
+                                    name="action_get_result_record">
+                            <field string="Result" name="result_count" widget="statinfo"/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="number"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="photo" widget="image" class="oe_avatar" position="after"/>
+                            <field name="signature" widget="signature" options="{'auto': true}"/>
+                            <field name="name"/>
+                            <field name="email"/>
+                        </group>
+                        <group>
+                            <field name="phone"/>
+                            <field name="date_of_birth" />
+                            <field name="age"/>
+                            <field name="gender"/>
+                            <field name="school_id"/>
+                            <field name="customer_details" />
+                            <field name="class_id" domain="[('schools','=',school_id)]"/>
+                            <field name="subject_ids" widget="many2many_tags"/>
+                            <field name="enrollment_date"/>
+                            <field name="currency_id" invisible="1"/>
+                            <field name="total_fee" string="Student Fee"></field>
+                        </group>
+                        <div class="alert alert-info" id="alert_draft_refund_tx" role="alert" widget="1000">
+                            <p>
+                                <strong>Info!</strong> If you want to add total salary than click on the button."
+                            </p>
+                            <button string="Add taxes" type="object" name="add_taxes_action" class="btn-primary"/>
+                        </div>
+                        <notebook>
+                        <page string="Marks" name="student_marks">
+                            <field name="marks_ids"/>
+                                
+                        </page>
+                        <page string="Result" name="teachers_result">
+                            <field name="result_ids"/>
+                                
+                        </page>
+                        </notebook>
+                    </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"></field>
+                        <field name="activity_ids"></field>
+                        <field name="message_ids"></field>
+                    </div>
+                </form>
+            </field>
+        </record>
+        
+
+        
+
+        <record id="view_student_kanban" model="ir.ui.view">
+            <field name="name">student.form.view</field>
+            <field name="model">school.student</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <field name="photo"/>
+                    <field name="name"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_click">
+                                <div class="oe_kanban_image">
+                                    <img t-att-src="kanban_image('school.student', 'photo', record.id.raw_value)" alt="..."/>
+                                </div>
+                                <div class="oe_kanban_details">
+                                    <strong><field name="number"/><br/><field name="name"/></strong>
+                                    <div>Class: <field name="class_id"/></div>
+                                    <div>Phone no.: <field name="phone"/></div>
+                                    <div>Enrollment Date: <field name="enrollment_date"/></div>
+
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <record id="view_student_graph" model="ir.ui.view">
+            <field name="name">student.graph.view</field>
+            <field name="model">school.student</field>
+            <field name="arch" type="xml">
+                <form>
+                    
+                    <graph name="Student Graph">
+                        <field name="name"/>
+                        <field name="subject_ids" type="measure" operator="count"/>
+                    </graph>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_student_tree" model="ir.ui.view">
+            <field name="name">student.tree.view</field>
+            <field name="model">school.student</field>
+            <field name="arch" type="xml">
+                <tree js_class="student_view_list">
+                    <field name="number"/>
+                    <field name="photo" widget="image"/>
+                    <!-- <field name="signature" widget="signature"/> -->
+                    <field name="name"/>
+                    <field name="email"/>
+                    <field name="phone"/>
+                    <field name="currency_id" column_invisible="True"/>
+                    <field name="date_of_birth" />
+                    <field name="age"/>
+                    <field name="gender"/>
+                    <field name="class_id"/>
+                    <field name="subject_ids" widget="many2many_tags"/>
+                    <field name="enrollment_date"/>
+                    <field name="total_fee" string="Student Fee"></field>
+                    <field name="school_id"/>
+                    <field name="marks_ids" />
+                    <field name="student_data" />
+
+                </tree>
+            </field>
+        </record>
+
+        <!-- student action -->
+        <record id="action_student" model="ir.actions.act_window">
+            <field name="name">Student</field>
+            <field name="res_model">school.student</field>
+            <field name="view_mode">kanban,tree,form,graph,search</field>
+            <!-- <field name="context">{'search_default_group_by_student_adds': 1}</field>  adding defoult group  -->
+            <!-- <field name="context">{'search_default_male': 1}</field>   adding defoult filter  -->
+            <!-- <field name="context">{}</field> -->
+            <field name="domain">[]</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Add student detail hear.
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="menu_school_students"
+              name="Students"
+              action="action_student"
+              parent="menu_school_student"
+              sequence="1"/>
+    </data>
+</odoo>

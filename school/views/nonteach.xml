@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- Define Views -->
+        <!-- tree/list -->
+        <record id="view_teacher_list" model="ir.ui.view">
+            <field name="name">teacher.list.view</field>
+            <field name="model">school.teacher</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="photo" widget="image"/>
+                    <!-- <field name="signature" widget="signature"/> -->
+                    <field name="name"/>
+                    <field name="email"/>
+                    <field name="phone"/>
+                    <field name="date_of_birth" />
+                    <field name="age"/>
+                    <field name="join_date"/>
+                    <field name="gender"/>
+                    <field name="currency_id" invisible="1"/>
+                    <field name ="salary" />
+                    <field name="school_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- form view -->
+        <record id="view_teacher_form" model="ir.ui.view">
+            <field name="name">teacher.form.view</field>
+            <field name="model">school.teacher</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="photo" widget="image" class="oe_avatar" position="after"/>
+                                <field name="signature" widget="signature" options="{'draw': true, 'auto': true, 'load': true}"/>
+                                <field name="name"/>
+                                <field name="email"/>
+                                <field name="phone"/>
+                                <field name="date_of_birth" />
+                            </group>
+                            <group>
+                                <field name="age"/>
+                                <field name="join_date"/>
+                                <field name="gender"/>  
+                                <field name="currency_id"/>
+                                <field name = "salary"/>
+                                <field name="school_id"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- search view -->
+        <record id="view_teacher_search" model="ir.ui.view">
+            <field name="name">teacher.search.view</field>
+            <field name="model">school.teacher</field>
+            <field name="arch" type="xml">
+                <search string="Search teacher">
+                    <field name="name" filter_domain="['|', '|', '|', ('name', 'ilike', self), ('email', 'ilike', self), ('subject', 'ilike', self), ('school_id', 'ilike', self)]"/>
+                    <field name="email"/>
+                    <field name="phone" filter_domain="['|', '|', ('phone', 'ilike', self), ('age', 'ilike', self), ('joining_date', 'ilike', self)]"/>
+                    <field name="age"/>
+                    <field name="join_date"/>
+                    <field name="gender"/>
+                    <field name = "subject"/>
+                    <field name="school_id"/>
+                    <filter name="filter_gender_male" string="filter gender male" domain="[('gender', '=', 'male')]"/>
+                    <filter name="filter_gender_female" string="filter gender female" domain="[('gender', '=', 'female')]"/>
+                    <separator/>
+                    <filter name="filter_age_above60" string="Teacher age grater 60" domain="[('age', '&gt;', 60)]"/>
+                    <group expand="0" string="Group By">
+                        <filter string="Age" name="group_by_age"  context="{'group_by': 'age'}"/>
+                        <filter string="Joining Date" name="group_by_join_date"  context="{'group_by': 'join_date'}"/>
+                        <filter string="Gender" name="group_by_gender"  context="{'group_by': 'gender'}"/>
+                        <filter string="subject" name="group_by_subject"  context="{'group_by': 'subject'}"/>
+                        <filter string="School" name="group_by_school"  context="{'group_by': 'school_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- graph view -->
+        <record id="view_teacher_graph" model="ir.ui.view">
+            <field name="name">teacher.graph.view</field>
+            <field name="model">school.teacher</field>
+            <field name="arch" type="xml">
+                <form>
+                    <graph>
+                        <field name="name"/>
+                        <field name="email"/>
+                        <field name="phone"/>
+                        <field name="age"/>
+                        <field name="join_date"/>
+                        <field name="gender"/>
+                        <field name = "salary"/>
+                        <field name="school_id"/>
+                    </graph>
+                </form>
+            </field>
+        </record>
+
+        <!-- calender view -->
+        <record id="view_teacher_calendar" model="ir.ui.view">
+            <field name="name">teacher.graph.view</field>
+            <field name="model">school.teacher</field>
+            <field name="arch" type="xml">
+                <calendar date_stop="join_date" date_start="join_date" string="Join Date">
+                    <field name="join_date"/>
+                    <field name="name"/>
+                </calendar>
+            </field>
+        </record>
+
+        <!-- pivot view -->
+        <record id="view_teacher_pivot" model="ir.ui.view">
+            <field name="name">teacher.pivot.view</field>
+            <field name="model">school.teacher</field>
+            <field name="arch" type="xml">
+                <pivot string="Teacher pivot view">
+                        <field name="gender" type="col"/>
+                        <field name="school_id" type="row"/>
+                </pivot>
+            </field>
+        </record>
+
+
+        <!-- teacher action -->
+        <record id="action_school_teacher" model="ir.actions.act_window">
+            <field name="name">Teacher</field>
+            <field name="res_model">school.teacher</field>
+            <field name="view_mode">tree,form,graph,calendar,pivot</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Add teacher detail hear.
+                </p>
+            </field>
+        </record>
+        
+
+        <menuitem id="menu_school_teachers"
+              name="Teachers"
+              action="action_school_teacher"
+              parent="menu_school_teacher"/>
+    </data>
+</odoo>

@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="point_of_sale.CreateButton">
+        <button class="control-button btn btn-light rounded-0 fw-bolder" t-on-click="() => this.onClearSelected()">
+            <i class="fa fa-trash me-1" role="img" aria-label="Custom Alert" title="Custom Alert"/>            
+            <span> </span>
+            <span>Clear Selected</span>
+        </button>
+        <button class="control-button btn btn-light rounded-0 fw-bolder" t-on-click="() => this.onClearAll()">
+            <i class="fa fa-solid fa-ban me-1" role="img" aria-label="Custom Alert" title="Custom Alert"/>            
+            <span> </span>
+            <span>Clear All</span>
+        </button>
+    </t>
+    <t t-name="point_of_sale.notesButton">
+        <button class="control-button btn btn-light rounded-0 fw-bolder" t-on-click="() => this.onClick()">
+            <i class="fa fa-comment" role="img" aria-label="Custom Alert" title="Custom Alert"/>            
+            <span> </span>
+            <span>Add Notes</span>
+        </button>
+    </t>
+    <t t-name="point_of_sale.discountButton">
+        <button class="control-button btn btn-light rounded-0 fw-bolder" t-on-click="() => this.onClickDiscount()">
+            <i class="fa fa-tag" role="img" aria-label="Custom Alert" title="Custom Alert"/>            
+            <span> </span>
+            <span>Discount </span>
+        </button>
+        <button class="control-button btn btn-light rounded-0 fw-bolder" t-on-click="() => this.onClickDiscountDefault()">
+            <i class="fa fa-percent" role="img" aria-label="Custom Alert" title="Custom Alert"/>
+            <span> </span>
+            <span>Default Discount</span>
+        </button>
+    </t>
+    <!-- location button -->
+    <t t-name="point_of_sale.locationButton">
+        <button t-att-class="`control-button btn btn-light rounded-0 fw-bolder ${this.getButtonClass()}`" t-on-click="() => this.onClick()">
+            <i class="fa-location" role="img" aria-label="Custom Alert" title="Custom Alert"/>            
+            <!-- <i class="fa-solid fa-location-dot"></i> -->
+            <span> </span>
+            <span t-esc="state.locationText"/>
+        </button>
+    </t>
+
+    <!-- school order butto -->
+    <t t-name="point_of_sale.schoolOrderTemplate">
+        <button class="control-button btn btn-light rounded-0 fw-bolder" t-on-click="() => this.onClick()">
+            <i class="fa fa-tag" role="img" aria-label="Custom Alert" title="Custom Alert"/>            
+            <span> </span>
+            <span>Add School Order</span>
+        </button>
+    </t>
+    <!--  <t t-name="point_of_sale.schoolOrderPopup">
+        <button class="control-button btn btn-light rounded-0 fw-bolder" t-on-click="() => this.onClickDiscountDefault()">
+            <i class="fa fa-percent" role="img" aria-label="Custom Alert" title="Custom Alert"/>
+            <span> </span>
+            <span>Show School Order</span>
+        </button>
+    </t> -->
+
+    <!-- template show button -->
+    <t t-name="point_of_sale.templateButton">
+        <button class="control-button btn btn-light rounded-0 fw-bolder" t-on-click="() => this.onClickShowTemp()">
+            <i class="fa fa-regular fa-square" role="img" aria-label="Custom Alert" title="Custom Alert"></i>         
+            <span> </span>
+            <span>Template </span>
+        </button>
+    </t>
+    <!-- Quantity in information section -->
+    <t t-name="point_of_sale.QuantityAdded" t-inherit="point_of_sale.OrderWidget" t-inherit-mode="extension">
+        <xpath expr="//div[@t-if='props.total or props.tax']" position="inside">
+            <div class="fs-6 text-muted subentry">
+                Total Product Added:
+                <span t-esc="props.totalProduct" class="addedProduct"/>
+            </div>
+            <div class="fs-6 text-muted subentry">
+                Total Quantity:
+                <t t-esc="props.productCount" class="totalQuantity"/>
+            </div>
+        </xpath>
+    </t>
+    <t t-name="point_of_sale.quantity" t-inherit="point_of_sale.ProductScreen" t-inherit-mode="extension">
+        <xpath expr="//OrderWidget[@t-slot-scope='scope']" position="attributes">
+            <attribute name="totalProduct">this.pos.get_order().get_orderlines().length</attribute>
+            <attribute name="totalQuantity">props.productCount</attribute>
+
+        </xpath>
+    </t>
+
+    <!-- POS payment -->
+    <t t-name="point_of_sale.paymentButtonAdd" t-inherit="point_of_sale.PaymentScreenButtons" t-inherit-mode="extension">
+        <xpath expr="//div" position="inside">
+            <button class="button js_invoice btn btn-light py-3 text-start rounded-0 border-bottom"
+                t-on-click="onClickPaymentAdd">
+                <i class="fa fa-check me-2" />Hello Brother!
+            </button>
+
+        </xpath>
+    </t>
+
+    <t t-name="point_of_sale.NoteDisplay" t-inherit="point_of_sale.OrderWidget" t-inherit-mode="extension">
+        <xpath expr="//div[hasclass('order-container')]" position="after">
+            <span class="order-note">
+                
+            </span>
+        </xpath>
+
+    </t>
+    <t t-name="point_of_sale.NoteInReport" t-inherit="point_of_sale.OrderReceipt" t-inherit-mode="extension">
+        <xpath expr="//div[hasclass('pos-receipt-amount')]" position="after">
+            <t t-if="props.data.note">
+                <div class="order-note text-center">
+                    Note: <t t-esc="props.data.note"/>
+                </div>
+            </t>
+            <t t-if="props.data.sundryNote">
+                <div class="order-note text-center">
+                    Sundry Note: <t t-esc="props.data.sundryNote"/>
+                </div>
+            </t>
+            <t t-if="props.data.locatin_add">
+                <div class="order-note text-center">
+                    Location: <t t-esc="props.data.locatin_add"/>
+                </div>
+            </t>
+        </xpath>
+    </t>
+    <!-- point_of_sale.PartnerListScreen -->
+    <t t-name="point_of_sale.sundryReport" t-inherit="point_of_sale.PartnerListScreen" t-inherit-mode="extension">
+        <xpath expr="//div[hasclass('top-right-buttons')]" position="inside">
+            <button type="button" class="btn btn-outline-success" t-on-click="() => this.onClickSundryPartner(62)">Set Sundry Customer</button>
+        </xpath>
+    </t>
+
+    <!-- <t t-name="point_of_sale.choilAdd" t-inherit="point_of_sale.OrderWidget" t-inherit-mode="extension">
+        <xpath expr="//div[@t-if='props.total or props.tax']" position="inside">
+            <childComponent>
+                <t t-set-slot="header_slot"/>
+                <p>Parent Template Content</p>
+                <t t-set-slot="body_slot">
+                  <p>Parent Body Content</p>
+                </t>
+            </childComponent>
+        </xpath>
+    </t>
+        <div t-name="point_of_sale.childComponent" class="childComponent">
+            <div class="child-component-title">
+                <t t-slot="header_slot">
+                    <span>Named Slots</span>
+                </t>
+            </div>
+            <div class="child-component-body">
+                <t t-slot="body_slot">
+                    <p>Child Template Body</p>
+                </t>
+            </div>
+         </div> -->
+    
+    
+</templates>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="res_location_view_form" model="ir.ui.view">
+        <field name="name">res.location.view.form</field>
+        <field name="model">res.location</field>
+        <field name="arch" type="xml">
+            <form string="Location">
+                <sheet>
+                    <group>
+                        <field name="location"/> 
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="res_location_view_tree" model="ir.ui.view">
+        <field name="name">res.location.view.tree</field>
+        <field name="model">res.location</field>
+        <field name="arch" type="xml">
+            <tree string="Location">
+                <field name="location"/> 
+            </tree>
+        </field>
+    </record>
+
+    <record id="res_location_action_ad" model="ir.actions.act_window">
+        <field name="name">Res Location</field>
+        <field name="res_model">res.location</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="res_location_view_tree"/>
+        <field name="view_id" ref="res_location_view_form"/>
+
+    </record>
+    <menuitem id="res_location_menu_ad"
+              name="Res Location"
+              parent="point_of_sale.menu_point_of_sale"
+              action="school.res_location_action_ad"
+              sequence="100"
+              />
+</odoo>

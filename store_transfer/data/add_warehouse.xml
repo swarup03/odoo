@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="store_transfer_data" model="stock.warehouse">
+        <field name="name">Brainvire stock</field>
+        <field name="code">BVS</field>
+        <field name="partner_id" ref="base.main_partner" />
+    </record>
+</odoo>

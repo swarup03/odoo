@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="payment_provider_cybersource_form" model="ir.ui.view">
+        <field name="name">cybersource Provider Form</field>
+        <field name="model">payment.provider</field>
+        <field name="inherit_id" ref="payment.payment_provider_form"/>
+        <field name="arch" type="xml">
+            <group name="provider_credentials" position="inside">
+                <group name="cybersource_credentials" invisible="code != 'cybersource'">
+                    <field name="cybersource_merchant_id" />
+                    <field name="cybersource_api_key_id" password="True"/>
+                    <field name="cybersource_secret_key" />
+                </group>
+            </group>
+
+        </field>
+    </record>
+    <record id="action_payment_provider_cybersource" model="ir.actions.act_window">
+        <field name="name">Payment Providers</field>
+        <field name="res_model">payment.provider</field>
+        <field name="view_mode">form</field>
+        <!-- <field name="context">{'stripe_onboarding': True}</field> -->
+    </record>
+    <!-- <record id="view_provider_form_custom" model="ir.ui.view">
+        <field name="name">payment.provider.form.custom</field>
+        <field name="model">payment.provider</field>
+        <field name="inherit_id" ref="payment.payment_provider_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="ID" name="payment_ids">
+                    <group invisible="context.get('show_key') == False">
+                        <field name="cybersource_merchant_id"/>
+                        <field name="cybersource_api_key_id"/>
+                        <field name="cybersource_secret_key"/>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record> -->
+    
+    
+    <record id="view_order_form_payment_my" model="ir.ui.view">
+        <field name="name">sale.order.form.my</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='action_cancel']" position="after">
+                <button class="btn btn-warning" string="Capture in Cybersource" type="object" name = "action_capture_in_cybersource" invisible="state != 'sale'"/>
+                <button class="btn btn-info" string="Test" type="object" name = "test_paym" invisible="state != 'sale'"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

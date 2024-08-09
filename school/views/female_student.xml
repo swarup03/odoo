@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- student action -->
+        <record id="action_female_student" model="ir.actions.act_window">
+            <field name="name">Female Student</field>
+            <field name="res_model">school.student</field>
+            <field name="view_mode">tree,form,kanban,graph</field>
+            <field name="domain">[('gender', '=', 'female')]</field>
+            <field name="context">{'default_gender':'female'}</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Add Female student detail hear.
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="menu_school_female_students"
+              name="Female Students"
+              action="action_female_student"
+              parent="menu_school_student"/>
+    </data>
+</odoo>

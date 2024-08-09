@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+<!-- Define Actions -->
+    <menuitem id="menu_school_root"
+                web_icon="school,static/description/icon.png"
+              name="Education Management"/>
+
+<!--    1ST MENU-->
+    <menuitem id="menu_school_teacher"
+              parent="menu_school_root"
+              name="Teacher"
+            sequence="2"/>
+
+<!--    2ND MENU-->
+    <menuitem id="menu_school_student"
+              parent="menu_school_root"
+              name="Student"
+    sequence="3"/>
+
+    <!-- 3RD MENU -->
+    <menuitem id="menu_school_other"
+              parent="menu_school_root"
+              name="Others"
+              groups="school.group_gov_record_access,school.group_school_owner_record_access,school.group_school_teacher_record_access"
+    sequence="4"/>
+
+    <!-- Sale module task-->
+    <menuitem id="commission_sale_id"
+          name="Commission"
+          parent="sale.sale_menu_root"
+          sequence="100"/>
+
+            <menuitem id="menu_commissions_sale_date"
+              name="Excel Report"
+              action="action_commission_sale_wizard_my"
+              parent="sale.menu_sale_report"/>
+              
+    <menuitem id="menu_school_config"
+    name="Configuration"
+    parent="menu_school_root"
+    sequence="50"/>
+    <!-- </menuitem> -->
+
+</odoo>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+   <record id="action_report_student_template" model="ir.actions.report">
+       <field name="name">Student Report</field>
+       <field name="model">school.student</field>
+       <field name="report_type">qweb-pdf</field>
+       <field name="report_name">school.report_student</field>
+       <field name="report_file">school.report_student</field>
+       <field name="print_report_name">'Student Report - %s' % (object.name)</field>
+       <field name="binding_model_id" ref="model_school_student"/>
+       <field name="binding_type">report</field>
+   </record>
+
+   <record id="action_sale_order_template" model="ir.actions.report">
+       <field name="name">Sale Report</field>
+       <field name="model">sale.order</field>
+       <field name="report_type">qweb-pdf</field>
+       <field name="report_name">school.report_saleorder_pro_forma_my</field>
+       <field name="report_file">school.report_saleorder_pro_forma_my</field>
+       <field name="print_report_name">'Sale selected Order - %s' % (object.name)</field>
+       <field name="binding_model_id" ref="model_sale_order"/>
+       <field name="binding_type">report</field>
+   </record>
+
+   <record id="action_filtered_data" model="ir.actions.report">
+    <field name="name">Sale Filtered Report</field>
+    <field name="model">commission.order.find</field>
+    <field name="report_type">qweb-pdf</field>
+    <field name="report_name">school.report_filter_data</field>
+    <field name="report_file">school.report_filter_data</field>
+    <field name="print_report_name">'Sale Filtered Order - %s' % (object.customer_name.name)</field>
+    <field name="binding_model_id" ref="model_commission_order_find"/>
+    <field name="binding_type">report</field>
+</record>
+<record id="action_res_partner" model="ir.actions.report">
+    <field name="name">Res Partner Report</field>
+    <field name="model">res.partner</field>
+    <field name="report_type">qweb-pdf</field>
+    <field name="report_name">school.res_partner_report</field>
+    <field name="report_file">school.res_partner_report</field>
+    <field name="print_report_name">'User - %s' % (object.name)</field>
+    <field name="binding_model_id" ref="model_res_partner"/>
+    <field name="binding_type">report</field>
+</record>
+<record id="action_hr_expence" model="ir.actions.report">
+    <field name="name">HR expence Report</field>
+    <field name="model">hr.expense</field>
+    <field name="report_type">qweb-pdf</field>
+    <field name="report_name">school.hr_expense_report</field>
+    <field name="report_file">school.hr_expense_report</field>
+    <field name="print_report_name">'User - %s' % (object.name)</field>
+    <field name="binding_model_id" ref="model_hr_expense"/>
+    <field name="binding_type">report</field>
+</record>
+</odoo>

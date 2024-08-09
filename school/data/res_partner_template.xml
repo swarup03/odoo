@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <!--Template to send demo mail template for the customer-->
+        <record id="mail_res_partner_template_blog" model="mail.template">
+            <field name="name">Email Template Partner</field>
+            <field name="model_id" ref="base.model_res_partner"/>
+            <field name="email_from">${(user.email or '').strip()}</field>
+            <field name="email_to">${(object.email or '').strip()}</field>
+            <field name="subject">Happy Birthday ${object.name}</field>
+            <field name="report_template_ids" eval="[(4, ref('school.action_res_partner'))]"/>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <div style="justify-content: center;padding-left: 35px;text-decoration: none; border-radius: 5px; font-size:13px;width:40%">
+                        <div>
+                            Hello <t t-out="object.name"/>,
+                            <p>
+                                Wishing you a very happy birthday!!
+                                <br/><br/>
+                                May you achieve more success, wealth and happiness in your life.
+                                <br/><br/>
+                                Enjoy your day !!!!
+                            </p>
+                        </div>
+                        <br/>
+                        Best Wishes,
+                        <br/>
+                        <t t-out="user.name"/>
+                    </div>
+                    <br/>
+                </div>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+<!--This is used for creating a new screen for showing booked orders-->
+    <t t-name="school.BookedSchoolScreen" owl="1">
+      <style>
+        .back{
+          cursor: pointer;
+        }
+      </style>
+    <div class="button back text-end" t-on-click="back" t-if="!props.new_order">
+      <i class="fa fa-solid fa-backward text-danger fs-3 px-5 py-3" ></i>
+    </div>
+      <div class="container-md">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">ID</th>
+              <th scope="col">Name</th>
+              <th scope="col">Email</th>
+              <th scope="col">Phone No.</th>
+              <th scope="col">Organisation</th>
+              <th scope="col">Zip Code</th>
+              <th scope="col">city</th>
+              <th scope="col">state_id</th>
+              <th scope="col">country_id</th>
+              <th scope="col">country_code</th>
+              <th scope="col">student_count</th>
+              <th scope="col">teacher_count</th>
+              <th scope="col">class_count</th>
+            </tr>
+          </thead>
+          <tbody>
+            <t t-set="i" t-value="1"/>
+            <t t-foreach="props.data" t-as="order" t-key="order.id">
+              <tr>
+                <th scope="row"><t t-esc="i"/></th>
+                <td><t t-esc="order.id"/></td>
+                <td><t t-esc="order.name"/></td>
+                <td><t t-esc="order.email"/></td>
+                <td><t t-esc="order.phone"/></td>
+                <td><t t-esc="order.organisation"/></td>
+                <td><t t-esc="order.zip"/></td>
+                <td><t t-esc="order.cirt"/></td>
+                <td><t t-esc="order.state"/></td>
+                <td><t t-esc="order.country"/></td>
+                <td><t t-esc="order.country_code"/></td>
+                <td><t t-esc="order.student_count"/></td>
+                <td><t t-esc="order.teacher_count"/></td>
+                <td><t t-esc="order.class_count"/></td>
+                <t t-set="i" t-value="i+1"/>
+              </tr>
+            </t>
+            
+          </tbody>
+        </table>
+      </div>
+    </t>
+</templates>

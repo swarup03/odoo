@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates>
+    <t t-name="school.modelInfoBtn" t-inherit="web.FormView">
+        <xpath expr="//div[@t-att-class='className']/div/Layout/t[@t-set-slot='layout-buttons']" position="inside">
+            <button id="mybtn" class="btn btn-outline-dark" t-on-click="actionInfoForm">Info
+            </button>
+        </xpath>
+    </t>
+    <t t-name="school.modelHrBtn" t-inherit="hr_expense.ListButtons" t-inherit-mode="extension">
+        <xpath expr="//div[hasclass('o_list_buttons')]" position="inside">
+            <button type="button" class="btn btn-outline-dark" t-on-click="actionhrList">Download Report</button>
+        </xpath>
+
+    </t>
+    <t t-name="school.modelPlanningBtn" t-inherit="planning.PlanningGanttView.Buttons" t-inherit-mode="extension">
+        <xpath expr="//div" position="after">
+            <button type="button" class="btn btn-outline-dark" t-on-click="actionPlanningList">Download Report</button>
+        </xpath>
+    </t>
+    <t t-name="school.modelSaleBtn" t-inherit="web.ListView">
+        <xpath expr="//t[@t-set-slot='control-panel-always-buttons']" position="inside">
+            <button type="button" class="btn btn-outline-dark" t-on-click="actionSaleList">Download Report</button>
+        </xpath>
+    </t>
+    <t t-name="school.modelSchoolBtn" t-inherit="web.ListView">
+        <xpath expr="//t[@t-set-slot='control-panel-always-buttons']" position="inside">
+            <button type="button" class="btn btn-outline-dark" t-on-click="actionSaleList">Download Report</button>
+        </xpath>
+    </t>
+    <t t-name="school.autoFillBtn" t-inherit="web.FormView">
+        <xpath expr="//div[@t-att-class='className']/div/Layout/t[@t-set-slot='layout-buttons']" position="inside">
+            <button id="mybtn" class="btn btn-outline-dark" t-on-click="actionAutoFill" >Download Result
+            </button>
+        </xpath>
+    </t>
+
+    <!-- <t t-name="bank.modelSaleBtnNew" t-inherit="web.ListRenderer" t-inherit-mode="extension">
+        <xpath expr="//div[@t-ref='root']/table/thead/tr/th/CheckBox"  position="after">
+            <button type="button" class="btn btn-secondary" t-on-click="() => this.actionSaleList()">Custom BTN</button>
+        </xpath>
+    </t> -->
+    <!-- <t t-name="school.modelSchoolIconForm" t-inherit="web.FormStatusIndicator" >
+        <xpath expr="//div[@class='o_form_status_indicator_buttons d-flex']" position="inside">
+            <button type="button" class="o_form_button_cancel btn btn-light px-1 py-0 lh-sm" t-on-click="actionFormIcon"><i class="fa fa-solid fa-user"></i></button>
+        </xpath>
+        
+    </t> -->
+    <!-- <t t-name="school.modelSchoolIconForm" t-inherit="web.FormView">
+        <xpath expr="//div[@class='o_form_status_indicator_buttons d-flex']" position="inside">
+            <button type="button" class="o_form_button_cancel btn btn-light px-1 py-0 lh-sm" t-on-click="actionFormIcon"><i class="fa fa-solid fa-user"></i></button>
+        </xpath>
+        
+    </t> -->
+
+
+    <!-- POS -->
+    <!-- <t t-name="school.modelClearButton" t-inherit="point_of_sale.ProductScreen">
+        <xpath expr="//t/div/div[@t-att-class='{'flex-grow-1': ui.isSmall}']" position="inside">
+            <button type="button" class="btn btn-outline-dark" t-on-click="actionSaleList">Download Report</button>
+        </xpath>
+    </t> -->
+    <!-- <templates xml:space="preserve"> -->
+
+        <!-- <t t-inherit="appointment.Appointment.appointment_info_no_slot" t-inherit-mode="extension">
+            <xpath expr="//div[hasclass('o_appointment_no_slot_overall_helper_txt')]" position="inside">
+                <div class="text-school">
+                    <a href="/school/hello">School</a>.
+                </div>
+            </xpath>
+        </t> -->
+    
+    <!-- </templates> -->
+ </templates>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_commision_order_list" model="ir.ui.view">
+            <field name="name">commision.order.list.view</field>
+            <field name="model">commission.order</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="order_id"/>
+                    <field name="customer_name"/>
+                    <field name="order_date" />
+                    <field name="commission"/>
+                    <field name="total"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- form view -->
+        <record id="view_commission_order_form" model="ir.ui.view">
+            <field name="name">commission.order.form.view</field>
+            <field name="model">commission.order</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="order_id"/>
+                            <field name="customer_name" />
+                            <field name="commission"/>
+                            <field name="total"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+
+        <record id="action_commission_order_line" model="ir.actions.act_window">
+            <field name="name">Commission Order</field>
+            <field name="res_model">commission.order</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No commission order found
+                </p>
+            </field>
+        </record>
+        
+
+        <menuitem id="menu_commissions_order_line"
+              name="Commissions order line"
+              action="action_commission_order_line"
+              parent="commission_sale_id"/>
+    </data>
+</odoo>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <menuitem
+        id="custom_website_menu"
+        name="Custom Website"
+        />
+        <menuitem
+            id="form_data_store_menu"
+            name="Form Data Store"
+            parent="custom_website_menu"
+            />
+</odoo>

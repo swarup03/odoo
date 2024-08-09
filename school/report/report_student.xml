@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+   <template id="report_student">
+       <t t-call="web.html_container">
+           <t t-foreach="docs" t-as="o">
+               <t t-call="web.external_layout">
+                    
+                    <div class="page" t-if="o.result_ids.status in ['failed','completed']">
+                       <div class="oe_structure"/>
+                       <h2>Student Report</h2>
+                       <div class="row">
+                        <div class="col-6">
+                            <h3>Result ID: <t t-esc="o.result_ids.number"/></h3>
+                            <p class="fs-5 text-capitalize">Name: <t t-esc="o.name"/></p>
+                            <p class="fs-6">Student Id: <t t-esc="o.number"/></p>
+                        </div>
+                        <div class="col-6">
+                            <span t-field="o.number" t-options="{'widget': 'barcode', 'img_style': 'width:100%;'}">Default Barcode Name</span>
+                        </div>
+                       </div>
+                       
+                       <table class="table table-sm o_main_table table-borderless mt-4" style="text-align: center;">
+                           <thead>
+                               <tr>
+                                    <th>Subject code</th>
+                                   <th>Subject</th>
+                                   <th>Marks Obtained</th>
+                               </tr>
+                           </thead>
+                           <tbody>
+                               <t t-foreach="o.marks_ids" t-as="marks">
+                                   <tr>
+                                        <td><t t-esc="marks.subject_id.code"/></td>
+                                       <td><t t-esc="marks.subject_id.name"/></td>
+                                       <td><t t-esc="marks.marks_obtained"/></td>
+                                   </tr>
+                               </t>
+                           </tbody>
+                       </table>
+                       <hr></hr>
+                       <div id="total" class="row justify-content-end">
+                            <div class="col-4 text-end">
+                                <table class="table table-sm table-borderless">
+                                    <div t-if="o.result_ids.status in ['failed','completed']">
+                                        <span t-if="o.result_ids.status == 'failed'" class="text-danger">FAIL</span>
+                                        <span t-if="o.result_ids.status == 'completed'" class="text-success">PASS</span>
+                                        <br></br>
+                                        <span>Percentage: <t t-esc="o.result_ids.percentage"/>%</span>
+                                    </div>
+                                    <div t-if="o.result_ids.status in ['pending']">
+                                        <span t-if="o.result_ids.status == 'pending' " class="text-warning">PENDING</span>
+                                    </div>                                        
+                                </table>
+                            </div>
+                        </div> 
+                   </div>
+                   <div class="page" t-if="o.result_ids.status in ['pending']">
+                        <h1>No result found</h1>
+                   </div>
+               </t>
+           </t>
+       </t>
+   </template>
+</odoo>

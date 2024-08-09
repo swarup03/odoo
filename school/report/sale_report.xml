@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_saleorder_document_inherit" inherit_id="sale.report_saleorder_document">
+        <xpath expr="//div[@t-field='doc.partner_id']" position="before">
+            <strong>Nick Name:</strong>
+            <span class="m-0 text-end" t-field="doc.nick_name">Nickname</span>                                     
+        </xpath>
+
+        <!-- <xpath expr="//th[@name='th_quantity']" position="before">
+            <th name="th_extraField">Extra Field</th>                                     
+        </xpath>
+
+        <xpath expr="//table/tbody/t[@t-as='line']/tr/t[@t-if='not line.display_type']/td[@name['td_quantity']]" position="after">
+            <td><span t-field="line.extra_tags"/></td>
+        </xpath> -->
+
+        <xpath expr="//th[@name='th_quantity']" position="before">
+            <th name="th_extraField">Image</th>                                     
+        </xpath>
+
+        <xpath expr="//table/tbody/t[@t-as='line']/tr/t[@t-if='not line.display_type']/td[@name['td_quantity']]" position="after">
+            <style>
+                .img-thumbnail{
+                    width: 10%;
+                }
+            </style>
+            <td class="img-thumbnail"><span t-field="line.product_image" t-options="{'widget': 'image'}" /></td>
+        </xpath>
+
+    </template>
+
+    <template id="report_picking_inherit" inherit_id="stock.report_picking">
+        <xpath expr="//div/div[@name='div_outgoing_address']/div[@t-if='o.should_print_delivery_address()']/span" position="before">
+            
+            <strong>Nick Name:</strong>
+            <span class="m-0 text-end" t-field="o.nick_name">Nickname</span>
+            <br></br>                                  
+                    
+        </xpath>
+
+        <xpath expr="//th[@name='th_product']" position="after">
+            <th name="th_extraField">Extra Field</th>
+        </xpath>
+
+        <xpath expr="//tr/td" position="inside">
+        <td><span t-field="ml.move_id.extra_tags"/></td>
+        </xpath>
+    </template>
+</odoo>

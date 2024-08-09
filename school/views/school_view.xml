@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- Define Views -->
+        <record id="view_school_list" model="ir.ui.view">
+            <field name="name">school.list.view</field>
+            <field name="model">school.profile</field>
+            <field name="arch" type="xml">
+                <tree decoration-info="organisation == 'private'" decoration-success="organisation == 'government'">
+                    <field name="number" />
+                    <field name="name"/>
+                    <field name="email"/>
+                    <field name="phone"/>
+                    <field name="organisation"/>
+                    <field name="student_ids"/>
+                    <field name="teacher_ids"/>
+                    <field name="class_ids"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_school_form" model="ir.ui.view">
+            <field name="name">school.form.view</field>
+            <field name="model">school.profile</field>
+            <field name="arch" type="xml">
+                <form>
+                <header>
+                  <button string="Add as Government" name="create_government" type="object" class="oe_highlight" groups="school.group_gov_record_access"/>
+                  <button string="Browse button" name="browse_button" type="object" class="oe_highlight"/>
+                  <button string="Send Mail" name="action_send_email" type="object" class="oe_highlight"/>
+                </header>
+
+                    <sheet>
+                        <div name="button_box" class="oe_button_box" position="inside">
+                            <button class="oe_stat_button"
+                                        type="object"
+                                        icon="fa-user-secret"
+                                        name="action_get_teacher_record">
+                                <field string="Teachers" name="teacher_count" widget="statinfo"/>
+                            </button>
+                            <button class="oe_stat_button"
+                                        type="object"
+                                        icon="fa-building"
+                                        name="action_get_class_record">
+                                <field string="Class" name="class_count" widget="statinfo"/>
+                            </button>
+                            <button class="oe_stat_button"
+                                        type="object"
+                                        icon="fa-users"
+                                        name="action_get_student_record">
+                                <field string="Student" name="student_count" widget="statinfo"/>
+                            </button>
+                        </div>
+                        <h1>
+                            <field name="number"/>
+                        </h1>
+                        <group>
+                            <group>
+                                <group >
+                                    <field name="street" placeholder="Street..." />
+                                    <field name="street2" placeholder="Street 2..."/>
+                                    <field name="zip" placeholder="ZIP"/>
+                                </group>
+                                <group>
+                                    <field name="country_id" placeholder="Country" />
+                                    <field name="state_id" placeholder="State"/>
+                                    <field name="city" placeholder="City"/>
+                                </group>
+                            </group>
+                            <group>
+                                <field name="name"/>
+                                <field name="email"/>
+                                <field name="phone"/>
+                                <field name="organisation"/>
+                            </group>
+                        </group>
+
+                    <notebook>
+                        <page string="Students" name="school_student">
+                            <field name="student_ids"/>
+                        </page>
+                        <page string="Teachers" name="school_teachers">
+                            <field name="teacher_ids"/>
+                                
+                        </page>
+                        <page string="Class" name="school_class">
+                            <field name="class_ids"/>
+                                
+                        </page>
+                        <page string="Course" name="school_course">
+                            <field name="course_ids" mode="tree">
+                                <tree
+                                    string="Course List"
+                                    editable="bottom"
+                                    limit="200">
+                                    <field name="course_id"/>
+                                    <field name="total_student" />
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                    </sheet>
+                </form>
+                
+            </field> 
+        </record>
+
+        <record id="view_school_list_search" model="ir.ui.view">
+            <field name="name">school.search.view</field>
+            <field name="model">school.profile</field>
+            <field name="arch" type="xml">
+                <search string="Search Property">
+                    <!-- Filters -->
+                    <searchpanel>
+                        <field name="organisation" string="Organisation" enable_counters="1"/>
+                    </searchpanel>
+                </search>
+            </field>
+        </record>
+
+
+
+        <!-- school action -->
+        <record id="action_school" model="ir.actions.act_window">
+            <field name="name">Schools</field>
+            <field name="res_model">school.profile</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Add School detail hear.
+                </p>
+            </field>
+        </record>
+        <menuitem id="menu_school_school"
+              parent="menu_school_root"
+              action="action_school"
+              name="School"
+    sequence="1"/>
+    </data>
+</odoo>

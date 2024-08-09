@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="my_model_layout" name="sale order form">
+        <t t-call="website.layout">
+            <!-- <t t-call="website.s_title"/>
+            <t t-call="website.s_image_gallery"/> -->
+            
+            <div class="container col-xxl-8 px-4 py-5">
+                <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+                <div class="col-10 col-sm-8 col-lg-6">
+                    <img src="/website_custom/static/src/img/logo.jpeg" class="d-block mx-lg-auto img img-fluid" alt="BV Themes" width="700" height="500" loading="lazy"/>
+                    <img class="img img-fluid d-block" src="" data-name="Image" data-index="1" alt=" "/>
+                </div>
+                <div class="col-lg-6">
+                    <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Responsive left-aligned hero with image</h1>
+                    <p class="lead">Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most popular front-end open source toolkit, featuring Sass variables and mixins, responsive grid system, extensive prebuilt components, and powerful JavaScript plugins.</p>
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                    <button type="button" class="btn btn-info btn-lg px-4 me-md-2">Primary</button>
+                    <button type="button" class="btn btn-outline-success btn-lg px-4">Default</button>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <div class="container">
+                <div>
+                    <div class="m-1 p-1 text-center">
+                        <h1>Form!</h1>
+                    </div>
+                </div>
+                <section class="s_website_form_my">
+                    <form class=" my-3 mx-1" action="/myhome/submited" method="post">
+                        <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Email address</label>
+                            <input type="email" class="email_input form-control" id="exampleInputEmail1" name="email" aria-describedby="emailHelp"/>
+                            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputPassword1" class="form-label">Password</label>
+                            <input type="password" class="password_input form-control" id="exampleInputPassword1" name="password"/>
+                        </div>
+                        <a href="#" class="s_website_form_send_my btn btn-primary">Submit</a>
+                        <span class="text-danger mx-1" id="s_website_form_result_my"></span>
+                    </form>        
+                </section>
+    
+                <!-- Modal -->
+                
+                <form>
+                    <div class="text-center">
+                        <h1 class="modal-title fs-1" id="exampleModalLabel">Search Sale Order</h1>
+                        <button type="button" class="btn btn-secondary btn-lg btn-block m-1" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            Search Sale Order
+                        </button>
+                    </div>
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Search Sale Order</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="mb-3">
+                                        <!-- <label for="orderNames" class="form-label">Sale Orders</label> -->
+                                        <!-- <select class="form-select" id="orderNames" name="orderNames">
+                                            <t t-foreach="sale_orders" t-as="order">
+                                                <option t-att-value="order.id"><t t-esc="order.name"/></option>
+                                            </t>
+                                        </select> -->
+                                        <label for="orderNames" class="form-label">Sale Orders</label>
+                                        <input type="text" class="form-control" name="search_order" id="orderSearchInput" placeholder="Search sale orders"/>
+                                        
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary">Search</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                
+                <div t-if="view_table" class="m-1">
+                    <!-- <div>
+                        <div class="m-1 p-1 text-center">
+                            <h1>Table!</h1>
+                        </div>
+                    </div> -->
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Create Data</th>
+                            <th scope="col">Customer</th>
+                            <th scope="col">Sales Person</th>
+                            <th scope="col">Company</th>
+                            <th scope="col" class="text-end">Amount Total</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <t t-foreach="sale_order_line" t-as="order">
+                            <tr>
+                                <th scope="row"><t t-esc="order.name"></t></th>
+                                <td><t t-esc="order.create_date"></t></td>
+                                <td><t t-esc="order.partner_id.name"></t></td>
+                                <td><t t-esc="order.user_id.name"></t></td>
+                                <td><t t-esc="order.company_id.name"></t></td>
+                                <td class="text-end"><t t-esc="order.currency_id.symbol"/><t t-esc="order.amount_total"></t></td>
+                            </tr>
+                        </t>
+                        </tbody>
+                    </table>
+                </div>
+                <div t-if='error'>
+                    <div class="alert alert-danger" role="alert">
+                        OOPS! No Record Found.
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+    <template id="my_model_status" name="sale order form">
+        <t t-call="website.layout">
+            <h1>Hello brother!</h1>
+        </t>
+    </template>
+</odoo>

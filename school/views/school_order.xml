@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="school_order_view_form" model="ir.ui.view">
+        <field name="name">school.order.view.form</field>
+        <field name="model">school.order</field>
+        <field name="arch" type="xml">
+            <form string="School Order">
+                <sheet>
+                    <group>
+                        <group string="Order">
+                            <field name="name" />
+                            <field name="school_id" />
+                            <field name="company_id" />
+                            <field name="date_order" />
+                        </group>
+                        <group string="Delivery">
+                            <field name="delivery_date" />
+                            <field name="delivery_address" />
+                            <field name="amount_total" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Products">
+                            <field name="order_line_ids" string="School Order Lines">
+                                <tree string="School Order Lines" editable="bottom">
+                                    <field name="product_id" />
+                                    <field name="price_unit" />
+                                    <field name="qty" />
+                                    <field name="discount" />
+                                    <field name="price_subtotal" />
+                                    <field name="tax_ids" widget="many2many_tags"/>
+                                    
+                                    <field name="total_price" />
+                                </tree>      
+                            </field>
+                            <group class="oe_subtotal_footer oe_right" colspan="2" name="order_total">
+                                <field name="amount_tax" widget="monetary"/>
+                                <label for="amount_total" string="Total"/>
+                                <field name="amount_total" nolabel="1" class="oe_subtotal_footer_separator oe_inline" widget="monetary"/>
+                            </group>
+                        </page>
+                        <page string="Note">
+                            <field name="note" placeholder="Enter your note here..." />
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="school_order_view_tree" model="ir.ui.view">
+        <field name="name">school.order.view.tree</field>
+        <field name="model">school.order</field>
+        <field name="arch" type="xml">
+            <tree string="School Orders">
+                <field name="name" />
+                <field name="school_id" />
+                <field name="company_id" />
+                <field name="date_order" />
+                <field name="note" />
+                <field name="delivery_address" />
+                <field name="delivery_date" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="school_order_action" model="ir.actions.act_window">
+        <field name="name">School Orders</field>
+        <field name="res_model">school.order</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p>No orders found.</p>
+        </field>
+    </record>
+
+    <menuitem id="school_order_menu" name="School Orders" parent="point_of_sale.menu_point_of_sale" action="school_order_action" sequence="3"/>
+</odoo>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<odoo>
+    <data noupdate="1">
+        
+        <record id="run_mail_notification_bday" model="ir.cron">
+            <field name="name">Birthday: Email Notification</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+            <field name="model_id" ref="model_res_partner"/>
+            <field name="code">model.run_bday_notification()</field>
+            <field name="state">code</field>
+        </record>
+
+        <record id="report_mail_notification_monthly" model="ir.cron">
+            <field name="name">Report: Monthly report Notification</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">months</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+            <field name="model_id" ref="model_sale_order"/>
+            <field name="code">model.run_monthly_notification()</field>
+            <field name="state">code</field>
+        </record>
+        
+    </data>
+</odoo>

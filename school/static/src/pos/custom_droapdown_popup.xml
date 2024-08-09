@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="school.CustomBropdownPopup" owl="1">
+        <div class="popup custom_popup">
+            <!-- Modal Header -->
+            <div class="modal-header justify-content-center">
+                <h2 class="modal-title">
+                    <t t-esc="props.title"/>
+                </h2>
+            </div>
+            <!-- Modal Body -->
+            <div class="modal-body custom-form-view">       
+                <form>
+                    <div class="form-group">
+                        <label for="exampleFormControlSelect1">Location:</label>
+                        <select class="form-control" id="exampleFormControlSelect1" t-model="state.inputValue">
+                            <option>Select Location</option>
+                            <t t-foreach="props.locations" t-as="location" t-key="props.locations">
+                                <option t-esc="location"/>
+                            </t>
+                        </select>
+                      </div>
+                </form>
+            </div>
+            <!-- Modal Footer -->
+            <div class="footer footer-flex modal-footer justify-content-end">
+                <div class="button confirm btn btn-lg btn-primary"
+                        t-on-click="confirm">
+                    <t t-esc="props.confirmText"/>
+                </div>
+                <div class="button cancel btn btn-lg"
+                        t-on-click="cancel">
+                    <t t-esc="props.closeText"/>
+                </div>
+            </div>
+        </div>
+    </t>
+</templates>

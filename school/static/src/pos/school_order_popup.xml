@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="school.schoolOrderPopup" owl="1">
+        <div class="popup custom_popup">
+            <!-- Modal Header -->
+            <div class="modal-header justify-content-center">
+                <h2 class="modal-title">
+                    <t t-esc="props.title"/>
+                </h2>
+            </div>
+            <!-- Modal Body -->
+            <div class="modal-body custom-form-view">       
+                <form>
+                    <div class="form-group">
+                        <label for="FormControlSelect">School:</label>
+                        <select class="form-control" id="FormControlSelect" t-model="state.inputValue">
+                            <option>Select School .......</option>
+                            <t t-foreach="props.data" t-as="d" t-key="d.id">
+                                <option t-esc="d.name"/>
+                            </t>
+                        </select>
+                        <label for="FormNote">Note:</label>
+                        <input class="form-control" id="FormNote" type="text" placeholder="Note" t-model="state.note" aria-label="default input example"/>
+                        <label for="FormAmount">Amount:</label>
+                        <input class="form-control" id="FormAmount" type="text" t-att-value="props.amount" placeholder="Amount" aria-label="default input example" readonly="1"/>
+                        <label for="FormOD">Order Date:</label>
+                        <input type="date" id="FormOD" class="form-control" t-att-value="props.currentDate"/>
+                        <label for="FormDD">Delivery Date:</label>
+                        <input type="date" class="form-control" id="FormDD" t-model="state.deliveryDate"/>
+                    </div>
+                </form>
+            </div>
+            <!-- Modal Footer -->
+            <div class="footer footer-flex modal-footer justify-content-end">
+                <div class="button confirm btn btn-lg btn-primary"
+                        t-on-click="confirm">
+                    <t t-esc="props.confirmText"/>
+                </div>
+                <div class="button cancel btn btn-lg"
+                        t-on-click="cancel">
+                    <t t-esc="props.closeText"/>
+                </div>
+            </div>
+        </div>
+    </t>
+</templates>

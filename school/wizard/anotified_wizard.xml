@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="anotified_wizard_form" model="ir.ui.view">
+            <field name="name">anotified.wizard.form.view</field>
+            <field name="model">notify.remove.data.wizard</field>
+            <field name="arch" type="xml">
+                <form> 
+                <div class="alert alert-warning"
+                     id="alert_draft_refund_tx"
+                     role="alert">
+                    <p>
+                        <strong>Warning!</strong> There if you want to remove all the record of student than press confirmed.
+                    </p>
+                </div>
+                <footer>
+                    <button string="Confirm" type="object" name="remove_student_actions" class="btn-primary"/>
+                    <button string="Close" special="cancel" class="btn-secondary"/>
+                </footer>
+                </form>
+            </field>
+        </record>
+        <!-- student action -->
+        <record id="action_student_wizard" model="ir.actions.act_window">
+            <field name="name">Notification</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">notify.remove.data.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="anotified_wizard_form"/>
+            <field name="target">new</field>
+        </record>
+    </data>
+</odoo>

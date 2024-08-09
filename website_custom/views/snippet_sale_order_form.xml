@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="s_sale_form_snippet" name="Sale Order Form">
+        <section class="container s_sale_form_snippet">
+            <select class="form-select o_select_sale_order form-select-lg mb-3" aria-label="Large select example">
+                <!-- Adding options from JS -->
+            </select>
+            <div class="offcanvas-body small order_data_show">
+                <!-- Sale order will be shown here -->
+            </div>
+        </section>
+    </template>
+    
+    <template id="sale_order_form_snippets" inherit_id="website.snippets" priority="11">
+        <xpath expr="//div[@id='snippet_feature']//t[@t-snippet][last()]" position="after">
+            <t t-snippet="website_custom.s_sale_form_snippet" string="Sale Order Form" t-thumbnail="/website/static/src/img/snippets_thumbs/s_table_of_content.svg"/>
+        </xpath>
+    </template>
+    
+
+</odoo>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+    
+        <record id="signed_data_view_tree" model="ir.ui.view">
+            <field name="name">signed.data.view.tree</field>
+            <field name="model">signed.data</field>
+            <field name="arch" type="xml">
+                <tree string="Signed Form Data">
+                    <field name="user_id" />
+                    <field name="email" />
+                    <field name="password" />
+                </tree>
+            </field>
+        </record>
+        <record id="signed_data_view_form" model="ir.ui.view">
+            <field name="name">signed.data.view.form</field>
+            <field name="model">signed.data</field>
+            <field name="arch" type="xml">
+                <form string="Signed Form Data">
+                    <sheet>
+                        <group>
+                            <field name="user_id" />
+                            <field name="email" />
+                            <field name="password" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="signed_data_action" model="ir.actions.act_window">
+            <field name="name">Signed Form</field>
+            <field name="res_model">signed.data</field>
+            <field name="view_mode">tree,form</field>
+            <!-- <field name="domain">[]</field>
+            <field name="context">{}</field> -->
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    OOPS! No Data Found.
+                </p>
+            </field>
+        </record>
+        <menuitem
+                id="signed_data_menu"
+                name="Form Signed Data"
+                action="signed_data_action"  
+                parent="form_data_store_menu"
+                sequence="20"/>
+    </data>
+    
+
+</odoo>

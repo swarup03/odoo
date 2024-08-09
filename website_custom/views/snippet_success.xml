@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="s_success_snippet" name="Success">
+        <section class="container">
+            <div class="alert alert-success" role="alert">
+                <h4 class="alert-heading">Well done!</h4>
+                <p>Aww yeah, you successfully read this important alert message. This example text is going to run a bit longer so that you can see how spacing within an alert works with this kind of content.</p>
+                <hr/>
+                <p class="mb-0">Whenever you need to, be sure to use margin utilities to keep things nice and tidy.</p>
+              </div>
+        </section>
+    </template>
+
+    <template id="success_snippets" inherit_id="website.snippets" priority="9">
+        <xpath expr="//div[@id='snippet_feature']//t[@t-snippet][last()]" position="after">
+            <t t-snippet="website_custom.s_success_snippet" string="Success" t-thumbnail="/website/static/src/img/snippets_thumbs/s_table_of_content.svg"/>
+        </xpath>
+    </template>
+
+</odoo>

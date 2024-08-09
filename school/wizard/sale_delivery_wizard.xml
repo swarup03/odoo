@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="delivery_wizard_form" model="ir.ui.view">
+            <field name="name">sale.wizard.form.view</field>
+            <field name="model">delivery.report.wizard</field>
+            <field name="arch" type="xml">
+                <form string=""> 
+                
+                <group>
+                    <group>
+                        <field name="order_id" invisible="1"></field>
+                        <field name="order_line_ids" widget="many2many_tags" domain="[('order_id','=',order_id)]"/>
+                    </group>
+                </group>
+                <footer>
+                    <button string="Print" name="print_report" type="object" class="btn btn-warning" 
+                    icon="fa-print"/>
+                    <button string="Inheritrd Report" name="print_inherit_report" type="object" class="btn btn-dark"
+                    icon="fa-print"/>
+                    <button string="Close" special="cancel" class="btn-secondary"/>
+                    
+                </footer>
+                </form>
+            </field>
+        </record>
+    
+        <!-- student action -->
+        <record id="action_sale_delivery_wizard" model="ir.actions.act_window">
+            <field name="name">Order List</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">delivery.report.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="delivery_wizard_form"/> <!-- Update this line -->
+            <field name="target">new</field>
+        </record>
+
+    </data>
+
+</odoo>

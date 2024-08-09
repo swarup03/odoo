@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_public_data_public,access_public_data_public,model_public_data,base.group_public,1,1,1,0
+access_public_data,public.data,model_public_data,base.group_user,1,1,1,1
+access_signed_data,signed.data,model_signed_data,base.group_user,1,1,1,1

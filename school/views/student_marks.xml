@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- Define Views -->
+        <record id="view_student_marks_form" model="ir.ui.view">
+            <field name="name">student.mark.form.view</field>
+            <field name="model">student.mark</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="student_id"/>
+                            <field name="subject_id"/>
+                            <field name="marks_obtained" />
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"></field>
+                        <field name="activity_ids"></field>
+                        <field name="message_ids"></field>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_student_marks_graph" model="ir.ui.view">
+            <field name="name">student.mark.graph.view</field>
+            <field name="model">student.mark</field>
+            <field name="arch" type="xml">
+                <form>
+                    <graph name="Student Graph">
+                        <field name="student_id"/>
+                        <field name="subject_id"/>
+                        <field name="marks_obtained" />
+                    </graph>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="view_student_marks_tree" model="ir.ui.view">
+            <field name="name">student.mark.tree.view</field>
+            <field name="model">student.mark</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="student_id"/>
+                    <field name="subject_id"/>
+                    <field name="marks_obtained" />
+                    
+                </tree>
+            </field>
+        </record>
+
+        <record id="student_mark_view_search" model="ir.ui.view">
+            <field name="name">student.mark.view.search</field>
+            <field name="model">student.mark</field>
+            <field name="arch" type="xml">
+                <search string="Search in Marks">
+
+                    <filter string="Marks less than 34" name="marks_lessthan"
+                            domain="[('marks_obtained', '&lt;', 34)]"/>
+                    <filter string="Marks grater than 34 but lessthen 80" name="marks_grater_than_less "
+                            domain="[('marks_obtained', '&gt;', 33),('marks_obtained', '&lt;', '80')]"/>
+                    <filter string="Marks grater than 80" name="marks_grater_than "
+                            domain="[('marks_obtained', '&gt;', '80')]"/>
+
+
+                    <group expand="0" string="Group By">
+                        <filter string="Students" name="group_by_student-id"  context="{'group_by': 'student_id'}"/>
+                        <filter string="Subjects" name="group_by_subject"  context="{'group_by': 'subject_id'}"/>
+                    </group>
+                    <searchpanel>
+                         <field name="subject_id" string="Subject" enable_counters="1"/>
+                    </searchpanel>
+                </search>
+            </field>
+        </record>
+        <!-- student action -->
+        <record id="action_student_marks" model="ir.actions.act_window">
+            <field name="name">Student Marks</field>
+            <field name="res_model">student.mark</field>
+            <field name="view_mode">tree,form,graph,search</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Add student result marks detail hear.
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="menu_school_students_marks"
+              name="Student Marks"
+              action="action_student_marks"
+              parent="menu_school_student"/>
+    </data>
+</odoo>

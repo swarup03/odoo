@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.employee.contract</field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="15"/>
+        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="inside">
+                <app data-string="Education Management system" string="Education Management system" name="school">
+                    <block title="Education Management system Settings" name="school">
+                        <setting string="School Discount"
+                                 help="This is school discount for school order"
+                                 id="school_discount_setting">
+                            <field name="is_discount_limit"/>
+                            <field name="discount_limit" invisible="is_discount_limit == 0"/> 
+                            
+                        </setting>
+                        <setting string="Add Discount in POS"
+                                 help="Add duscount in pos model in %"
+                                 id="school_type_setting">
+                            <!-- <field name="is_discount_limit"/> -->
+                            <field name="school_id"/>   
+                        </setting>
+                    </block>
+                </app>
+            </xpath>
+        </field>
+    </record>
+    <record id="action_school_config_settings" model="ir.actions.act_window">
+        <field name="name">Settings</field>
+        <field name="res_model">res.config.settings</field>
+        <field name="view_id" ref="res_config_settings_view_form"/>
+        <field name="view_mode">form</field>
+        <field name="target">inline</field>
+        <field name="context">{'module' : 'school', 'bin_size': False}</field>
+
+    </record>
+    <menuitem id="menu_school_general_settings"
+        name="Settings"
+          sequence="10"
+          parent="menu_school_config"
+          action="action_school_config_settings"/>
+</odoo>
+
+    <!-- <record id="res_config_settings_action" model="ir.actions.act_window">
+        <field name="name">Configuration</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">res.config.settings</field>
+        <field name="view_mode">form</field>
+        <field name="target">inline</field>
+        <field name="context">{'module' : 'school'}</field>
+     </record>
+     <menuitem id="employee_management_menu_root"
+         name="Employee Management"
+         sequence="1"/>
+    <menuitem id="employee_management_menu_action"
+            name="Configuration"
+            sequence="6"/>
+     <menuitem id="employee_contract_settings_menu_action"
+         name="Settings"
+         action="res_config_settings_action"
+         sequence="7"/> -->
+<!-- </odoo> -->

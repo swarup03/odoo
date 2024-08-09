@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="order_details" name="Order Detail">
+        <t t-call="website.layout">
+            <div class="shopping_mall_customer my-3 container">
+                <t t-esc="order"/>
+            </div>
+        </t>
+    </template>
+</odoo>

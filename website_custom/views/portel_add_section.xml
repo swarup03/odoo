@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="portal_my_home_menu_school" name="Portal layout : School entries" inherit_id="portal.portal_breadcrumbs" priority="20">
+        <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
+            <li id="portal_breadcrumbs_sale" t-if="page_name == 'quote' or sale_order and sale_order.state in ('sent', 'cancel')" t-attf-class="breadcrumb-item #{'active ' if not sale_order else ''}">
+                <a t-if="sale_order" t-attf-href="/my/quotes?{{ keep_query() }}">Quotations</a>
+                <t t-else="">Quotations</t>
+            </li>
+            <li t-elif="page_name == 'order' or sale_order and sale_order.state not in ('sent', 'cancel')" t-attf-class="breadcrumb-item #{'active ' if not sale_order else ''}">
+                <a t-if="sale_order" t-attf-href="/my/orders?{{ keep_query() }}">Sales Orders</a>
+                <t t-else="">Sales Orders</t>
+            </li>
+            <li t-if="sale_order" class="breadcrumb-item active">
+                <span t-field="sale_order.type_name"/>
+                <t t-out="sale_order.name"/>
+            </li>
+        </xpath>
+    </template>
+
+    <template id="portal_my_home_school" name="Show School" customize_show="True" inherit_id="portal.portal_my_home" priority="100">
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="before">
+            <t t-set="portal_client_category_enable" t-value="True"/>
+
+        </xpath>
+        <div id="portal_client_category" position="inside">
+            <t t-call="portal.portal_docs_entry">
+                <t t-set="icon" t-value="''"/>
+                <t t-set="title">School Records</t>
+                <t t-set="url" t-value="'/my/orders'"/>
+                <t t-set="text">Follow, view School Records</t>
+                <!-- <t t-set="placeholder_count" t-value="'order_count'"/> -->
+            </t>
+        </div>
+    </template>
+
+</odoo>

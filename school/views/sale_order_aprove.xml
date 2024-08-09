@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- student action -->
+        <record id="action_approve_sale" model="ir.actions.act_window">
+            <field name="name">Approve Order</field>
+            <field name="res_model">sale.order</field>
+            <field name="view_mode">tree,form,kanban,graph</field>
+            <field name="domain">[('state', '=', 'to_approve')]</field>
+        </record>
+
+        <menuitem id="menu_school_female_students"
+              name="Approve Order"
+              action="action_approve_sale"
+              parent="sale.sale_order_menu"
+              groups="school.group_manager_access"/>
+    </data>
+</odoo>
